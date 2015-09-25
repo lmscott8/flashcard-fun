@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+<title>Flashcard Fun</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto|Sigmar+One|Source+Sans+Pro:600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="scripts/jquery-ui.min.js"></script>
+<script src="scripts/app.js"></script>
+</head>
+<body>
+  <div id="topbar">
+    <div id="logo">Flashcard Fun</div>
+    <button type="button" id="button">Log In</button>
+    <div class="input_group">
+      <label for"password">password:</label>
+      <input type="text" id="password"></input>
+    </div>
+    <div class="input_group">
+      <label for"username">username:</label>
+      <input type="text" id="username"></input>
+    </div>
+  </div>
+  <div id="flashcard">
+    <input type="text" id="answer"></input>
+    <div id="equals">=</div>
+    <div id="equation">22 + 37</div>
+  </div>
+  <footer>
+    <div id="operator">
+      <div id="addition">+</div>
+      <div id="subtraction">-</div>
+      <div id="multiplication">x</div>
+      <div id="percentage">0%</div>
+      <div id="progress_bar">
+        <div id="progress_bar_fill"></div>
+      </div>
+      <div id="level">Level 1</div>
+      <div id="help">
+        ?
+        <div id="instructions">
+          Type your answer to the problem on the flashcard in the square, then press Enter.
+        </div>
+      </div>
+
+    </div>
+  </footer>
+</body>

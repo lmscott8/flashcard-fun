@@ -1,0 +1,185 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background-image: url("../images/desk.jpg");
+  background-size: cover;
+  font-family: 'Roboto', sans-serif;
+}
+#topbar {
+  position: fixed;
+  top: 0;
+  background-color: #0A309A;
+  width: 100%;
+  height: 60px
+}
+#topbar #logo {
+  font-family: 'Sigmar One', cursive;
+  font-size: 30px;
+  color: white;
+  float: left;
+  margin-left: 75px;
+  margin-top: 5px
+}
+#topbar #button {
+  float: right;
+  margin-right: 25px;
+  margin-top: 20px;
+}
+#topbar .input_group {
+  float: right;
+  margin-right: 25px;
+}
+#topbar .input_group label {
+  color: white;
+  margin-top: 5px;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+}
+#topbar .input_group input {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  color: #020A1F;
+  padding: 5px 8px;
+  margin-top: 5px;
+  width: 125px;
+  border: 0px;
+  border-radius: 2px;
+  opacity: 0.6;
+}
+#topbar .input_group input:focus {
+  opacity: 1;
+}
+
+#flashcard {
+  margin: 200px auto;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6cdb2b+0,59bf50+100 */
+  background: white;
+  width: 500px;
+  height: 250px;
+  border-radius: 25px;
+  border: 10px solid #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+#flashcard #answer {
+  font-family: 'Roboto', sans-serif;
+  font-size: 60px;
+  color: #333;
+  float: right;
+  margin-right: 30px;
+  margin-top: 80px;
+  width: 80px;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+#flashcard #equals {
+  font-family: 'Roboto', sans-serif;
+  font-size: 80px;
+  color: #333;
+  float: right;
+  margin-right: 20px;
+  margin-top: 80px;
+}
+#flashcard #equation {
+  font-family: 'Roboto', sans-serif;
+  font-size: 80px;
+  color: #333;
+  float: right;
+  margin-right: 20px;
+  margin-top: 80px;
+}
+
+
+footer {
+  position: fixed;
+  background-color: #0A309A;
+  bottom: 0px;
+  width: 100%;
+  height: 50px
+}
+footer #addition {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 35px;
+  color: white;
+  float: left;
+  margin-left: 75px;
+  margin-top: 3px
+}
+footer #subtraction {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 35px;
+  color: white;
+  float: left;
+  margin-left: 35px;
+  margin-top: 3px
+}
+footer #multiplication {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 35px;
+  color: white;
+  float: left;
+  margin-left: 35px;
+  margin-top: 3px
+}
+footer #level {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 25px;
+  color: white;
+  float: right;
+  margin-right: 50px;
+  margin-top: 7px
+}
+footer #percentage {
+  font-family: 'Roboto', sans-serif;
+  font-size: 25px;
+  color: white;
+  float: right;
+  margin-right: 75px;
+  margin-top: 10px
+}
+footer #progress_bar {
+  width: 100px;
+  height: 20px;
+  margin-right: 50px;
+  margin-top: 15px;
+  float: right;
+  background-color: #061B5C;
+  border-radius: 5px;
+}
+footer #progress_bar_fill {
+  width: 0px;
+  height: 14px;
+  margin-left: 5px;
+  margin-top: 3px;
+  background-color: white;
+  border-radius: 5px;
+}
+footer #help {
+  position: relative;
+  font-size: 25px;
+  color: white;
+  float: right;
+  margin-right: 50px;
+  margin-top: 7px;
+  background-color: #FFA129;
+  height: 32px;
+  width: 35px;
+  text-align: center;
+  padding-top: 3px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+footer #help #instructions {
+  display: none;
+  bottom: 40px;
+  right: -90px;
+  background-color: white;
+  width: 200px;
+  position: absolute;
+  color: black;
+  padding: 10px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 1.3;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
