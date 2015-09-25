@@ -8,10 +8,15 @@ $(document).ready(function() {
   var progressBarWidth = 90;
   var correctPerLevel = 2;
   var level = 1;
-  var $levelDiv = $("#level")
-  var $flashcard = $("#flashcard")
+  var $levelDiv = $("#level");
+  var $flashcard = $("#flashcard");
   var numWrong = 0;
-  var $percentage = $("#percentage")
+  var $percentage = $("#percentage");
+  var $additionDiv = $("#addition");
+  var $subtractionDiv = $("#subtraction");
+  var $multiplicationDiv = $("#multiplication");
+  var mathType = "addition";
+  var $operators = $(".operator");
 
 
   newCard();
@@ -34,10 +39,24 @@ $(document).ready(function() {
   })
 
   function newCard() {
-    var firstNumber = getRandomNumber(1,5)
-    var secondNumber = getRandomNumber(1,5)
-    answer = firstNumber + secondNumber
-    $equationDiv.text(firstNumber + " + " + secondNumber);
+    var firstNumber = getRandomNumber(1,5);
+    var secondNumber = getRandomNumber(1,5);
+    if (mathType == "subtraction") {
+      if (firstNumber < secondNumber) {
+        var tmp = firstNumber;
+        firstNumber = secondNumber;
+        secondNumber = tmp;
+      }
+      answer = firstNumber - secondNumber;
+      $equationDiv.text(firstNumber + " - " + secondNumber);
+    } else if (mathType == "multiplication") {
+      answer = firstNumber * secondNumber;
+      $equationDiv.text(firstNumber + " x " + secondNumber);
+    } else {
+      answer = firstNumber + secondNumber;
+      $equationDiv.text(firstNumber + " + " + secondNumber);
+    }
+    $answerInput.focus();
   }
 
   function getRandomNumber(min, max) {
@@ -55,4 +74,32 @@ $(document).ready(function() {
   $("#help").click(function() {
     $("#instructions").slideToggle()
   });
-})
+
+  $additionDiv.click(function() {
+    if (mathType != "addition") {
+      mathType = "addition";
+      newCard();
+      $operators.removeClass("selected");
+      $additionDiv.addClass("selected");
+    }
+  });
+
+  $subtractionDiv.click(function() {
+    if (mathType != "subtraction") {
+      mathType = "subtraction";
+      newCard();
+      $operators.removeClass("selected");
+      $subtractionDiv.addClass("selected");
+    }
+  });
+
+  $multiplicationDiv.click(function() {
+    if (mathType != "multiplication") {
+      mathType = "multiplication";
+      newCard();
+      $operators.removeClass("selected");
+      $multiplicationDiv.addClass("selected");
+    }
+  });
+
+});

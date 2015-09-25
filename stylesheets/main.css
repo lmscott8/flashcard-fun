@@ -97,29 +97,21 @@ footer {
   width: 100%;
   height: 50px
 }
+footer .operator {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 35px;
+  color: white;
+  float: left;
+  margin-left: 35px;
+  margin-top: 3px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+footer .operator.selected, footer .operator:hover {
+  opacity: 1;
+}
 footer #addition {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 35px;
-  color: white;
-  float: left;
   margin-left: 75px;
-  margin-top: 3px
-}
-footer #subtraction {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 35px;
-  color: white;
-  float: left;
-  margin-left: 35px;
-  margin-top: 3px
-}
-footer #multiplication {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 35px;
-  color: white;
-  float: left;
-  margin-left: 35px;
-  margin-top: 3px
 }
 footer #level {
   font-family: 'Source Sans Pro', sans-serif;
