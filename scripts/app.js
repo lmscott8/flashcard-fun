@@ -17,6 +17,8 @@ $(document).ready(function() {
   var $multiplicationDiv = $("#multiplication");
   var mathType = "addition";
   var $operators = $(".operator");
+  var $overlay = $("#overlay");
+  var $starDiv = $("#overlay .star");
 
 
   newCard();
@@ -68,6 +70,12 @@ $(document).ready(function() {
     if (numCorrect % correctPerLevel == 0) {
       level += 1;
       $levelDiv.text("Level " + level);
+      $starDiv.text(level);
+      $overlay.fadeIn(500).delay(2000).fadeOut(500);
+      $flashcard.fadeOut(200).delay(2600).fadeIn(200);
+      setTimeout(function() {
+        $answerInput.focus();
+      }, 3000);
     }
   }
 
