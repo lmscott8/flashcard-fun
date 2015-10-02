@@ -3,14 +3,11 @@ $(document).ready(function() {
   var $equationDiv = $("#equation");
   var answer;
   var operator = "+";
-  var numCorrect = 0;
   var $progressBarFill = $("#progress_bar_fill");
   var progressBarWidth = 90;
   var correctPerLevel = 2;
-  var level = 1;
   var $levelDiv = $("#level");
   var $flashcard = $("#flashcard");
-  var numWrong = 0;
   var $percentage = $("#percentage");
   var $additionDiv = $("#addition");
   var $subtractionDiv = $("#subtraction");
@@ -21,23 +18,39 @@ $(document).ready(function() {
   var $starDiv = $("#overlay .star");
   var starColors = ["gray", "blue", "green", "red", "purple", "yellow"];
 
+  var stateInfo = {
+    addition: {
+      level: 1,
+      numCorrect: 0,
+      numWrong: 0
+    },
+    subtraction: {
+      level: 1,
+      numCorrect: 0,
+      numWrong: 0
+    },
+    multiplication: {
+      level: 1,
+      numCorrect: 0,
+      numWrong: 0
+    }
+  }
+  var state = stateInfo["addition"];
 
   newCard();
 
   $answerInput.keyup(function(event) {
     if (event.keyCode == 13) {
       if ($answerInput.val() == answer) {
-        numCorrect += 1;
-        updateProgress();
+        state.numCorrect += 1;
+        updateProgress(true);
         newCard();
       } else {
         $flashcard.effect("shake");
-        numWrong += 1;
+        state.numWrong += 1;
+        updateProgress(false);
       }
       $answerInput.val("");
-      var percent = numCorrect / (numCorrect + numWrong) * 100;
-      percent = Math.round(percent);
-      $percentage.text(percent + "%");
     }
   })
 
@@ -66,14 +79,20 @@ $(document).ready(function() {
     return Math.floor((Math.random() * max) + min);
   }
 
-  function updateProgress() {
-    $progressBarFill.width(numCorrect % correctPerLevel * progressBarWidth / correctPerLevel);
-    if (numCorrect % correctPerLevel == 0) {
-      level += 1;
-      var levelColor = starColors[level % starColors.length];
-      $levelDiv.text("Level " + level);
-      $levelDiv.removeClass().addClass(levelColor);
-      $starDiv.text(level);
+  function updateProgress(showOverlay) {
+    $progressBarFill.width(state.numCorrect % correctPerLevel * progressBarWidth / correctPerLevel);
+    var percent = state.numCorrect / (state.numCorrect + state.numWrong) * 100;
+    percent = Math.round(percent || 0);
+    $percentage.text(percent + "%");
+
+    if (showOverlay && state.numCorrect % correctPerLevel == 0) {
+      state.level += 1;
+    }
+    var levelColor = starColors[state.level % starColors.length];
+    $levelDiv.text("Level " + state.level);
+    $levelDiv.removeClass().addClass(levelColor);
+    if (showOverlay && state.numCorrect % correctPerLevel == 0) {
+      $starDiv.text(state.level);
       $starDiv.removeClass().addClass("star " + levelColor);
       $overlay.fadeIn(500).delay(2000).fadeOut(500);
       $flashcard.fadeOut(200).delay(2600).fadeIn(200);
@@ -90,6 +109,8 @@ $(document).ready(function() {
   $additionDiv.click(function() {
     if (mathType != "addition") {
       mathType = "addition";
+      state = stateInfo.addition;
+      updateProgress(false);
       newCard();
       $operators.removeClass("selected");
       $additionDiv.addClass("selected");
@@ -99,6 +120,8 @@ $(document).ready(function() {
   $subtractionDiv.click(function() {
     if (mathType != "subtraction") {
       mathType = "subtraction";
+      state = stateInfo.subtraction;
+      updateProgress(false);
       newCard();
       $operators.removeClass("selected");
       $subtractionDiv.addClass("selected");
@@ -108,6 +131,8 @@ $(document).ready(function() {
   $multiplicationDiv.click(function() {
     if (mathType != "multiplication") {
       mathType = "multiplication";
+      state = stateInfo.multiplication;
+      updateProgress(false);
       newCard();
       $operators.removeClass("selected");
       $multiplicationDiv.addClass("selected");
