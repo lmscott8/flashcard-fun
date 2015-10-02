@@ -115,11 +115,32 @@ footer #addition {
 }
 footer #level {
   font-family: 'Source Sans Pro', sans-serif;
+  line-height: 40px;
   font-size: 25px;
   color: white;
   float: right;
   margin-right: 50px;
-  margin-top: 7px
+  margin-top: 5px
+}
+footer #level:before {
+  float: left;
+  margin-right: 10px;
+  content: url("../images/star_blue_mini.png")
+}
+footer #level.gray:before {
+  content: url("../images/star_gray_mini.png")
+}
+footer #level.green:before {
+  content: url("../images/star_green_mini.png")
+}
+footer #level.purple:before {
+  content: url("../images/star_purple_mini.png")
+}
+footer #level.red:before {
+  content: url("../images/star_red_mini.png")
+}
+footer #level.yellow:before {
+  content: url("../images/star_yellow_mini.png")
 }
 footer #percentage {
   font-family: 'Roboto', sans-serif;
@@ -164,7 +185,7 @@ footer #help {
 footer #help #instructions {
   display: none;
   bottom: 40px;
-  right: -90px;
+  right: -15px;
   background-color: white;
   width: 200px;
   position: absolute;
@@ -193,4 +214,19 @@ footer #help #instructions {
   color: #333;
   text-align: center;
   padding-top: 140px;
+}
+#overlay .star.blue {
+  background-image: url("../images/star_blue.png");
+}
+#overlay .star.gray {
+  background-image: url("../images/star_gray.png");
+}
+#overlay .star.green {
+  background-image: url("../images/star_green.png");
+}
+#overlay .star.purple {
+  background-image: url("../images/star_purple.png");
+}
+#overlay .star.red {
+  background-image: url("../images/star_red.png");
 }

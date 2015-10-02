@@ -19,6 +19,7 @@ $(document).ready(function() {
   var $operators = $(".operator");
   var $overlay = $("#overlay");
   var $starDiv = $("#overlay .star");
+  var starColors = ["gray", "blue", "green", "red", "purple", "yellow"];
 
 
   newCard();
@@ -69,8 +70,11 @@ $(document).ready(function() {
     $progressBarFill.width(numCorrect % correctPerLevel * progressBarWidth / correctPerLevel);
     if (numCorrect % correctPerLevel == 0) {
       level += 1;
+      var levelColor = starColors[level % starColors.length];
       $levelDiv.text("Level " + level);
+      $levelDiv.removeClass().addClass(levelColor);
       $starDiv.text(level);
+      $starDiv.removeClass().addClass("star " + levelColor);
       $overlay.fadeIn(500).delay(2000).fadeOut(500);
       $flashcard.fadeOut(200).delay(2600).fadeIn(200);
       setTimeout(function() {
