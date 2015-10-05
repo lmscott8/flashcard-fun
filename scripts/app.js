@@ -1,23 +1,28 @@
 $(document).ready(function() {
+  // configuration variables
+  var progressBarWidth = 90;
+  var correctPerLevel = 3;
+  var progressBarWidthPerCorrect = progressBarWidth / correctPerLevel;
+  var starColors = ["gray", "blue", "green", "red", "purple", "yellow"];
+
+  // jQuery variables
   var $answerInput = $("#answer");
   var $equationDiv = $("#equation");
-  var answer;
-  var operator = "+";
   var $progressBarFill = $("#progress_bar_fill");
-  var progressBarWidth = 90;
-  var correctPerLevel = 2;
   var $levelDiv = $("#level");
   var $flashcard = $("#flashcard");
   var $percentage = $("#percentage");
   var $additionDiv = $("#addition");
   var $subtractionDiv = $("#subtraction");
   var $multiplicationDiv = $("#multiplication");
-  var mathType = "addition";
   var $operators = $(".operator");
   var $overlay = $("#overlay");
   var $starDiv = $("#overlay .star");
-  var starColors = ["gray", "blue", "green", "red", "purple", "yellow"];
+  var $help = $("#help");
+  var $instructions = $("#instructions");
 
+  // state variables
+  var answer;
   var stateInfo = {
     addition: {
       level: 1,
@@ -35,30 +40,42 @@ $(document).ready(function() {
       numWrong: 0
     }
   }
-  var state = stateInfo["addition"];
 
+  // setting initial state
+  var operator = "+";
+  var mathType = "addition";
+  var state = stateInfo["addition"];
   newCard();
 
+  // answer input key listener
   $answerInput.keyup(function(event) {
+    // if user hits enter
     if (event.keyCode == 13) {
+      // if answer is correct
       if ($answerInput.val() == answer) {
         state.numCorrect += 1;
         updateProgress(true);
         newCard();
+
+      // if answer is false
       } else {
         $flashcard.effect("shake");
         state.numWrong += 1;
         updateProgress(false);
       }
+
+      // always clear answer input
       $answerInput.val("");
     }
-  })
+  });
 
+  // render a new flashcard
   function newCard() {
     var firstNumber = getRandomNumber(1,5);
     var secondNumber = getRandomNumber(1,5);
     if (mathType == "subtraction") {
       if (firstNumber < secondNumber) {
+        // if first number is smaller than the second number, swap them
         var tmp = firstNumber;
         firstNumber = secondNumber;
         secondNumber = tmp;
@@ -68,10 +85,11 @@ $(document).ready(function() {
     } else if (mathType == "multiplication") {
       answer = firstNumber * secondNumber;
       $equationDiv.text(firstNumber + " x " + secondNumber);
-    } else {
+    } else { // addition
       answer = firstNumber + secondNumber;
       $equationDiv.text(firstNumber + " + " + secondNumber);
     }
+    // depending on what happens before this, the input could be out of focus
     $answerInput.focus();
   }
 
@@ -79,19 +97,27 @@ $(document).ready(function() {
     return Math.floor((Math.random() * max) + min);
   }
 
+  // updates progress bar, level, and percent correct
+  // called when answer submitted or the operator changes
   function updateProgress(showOverlay) {
-    $progressBarFill.width(state.numCorrect % correctPerLevel * progressBarWidth / correctPerLevel);
+    // update progress bar
+    var correctThisLevel = state.numCorrect % correctPerLevel;
+    $progressBarFill.width(correctThisLevel * progressBarWidthPerCorrect);
+    // update percent correct
     var percent = state.numCorrect / (state.numCorrect + state.numWrong) * 100;
     percent = Math.round(percent || 0);
     $percentage.text(percent + "%");
-
-    if (showOverlay && state.numCorrect % correctPerLevel == 0) {
+    // update level number
+    if (showOverlay && correctThisLevel == 0) {
       state.level += 1;
     }
+    // setting level text in bottom right corner
     var levelColor = starColors[state.level % starColors.length];
     $levelDiv.text("Level " + state.level);
-    $levelDiv.removeClass().addClass(levelColor);
-    if (showOverlay && state.numCorrect % correctPerLevel == 0) {
+    $levelDiv.removeClass().addClass(levelColor); // removing old class, adding new color
+
+    // show overlay
+    if (showOverlay && correctThisLevel == 0) {
       $starDiv.text(state.level);
       $starDiv.removeClass().addClass("star " + levelColor);
       $overlay.fadeIn(500).delay(2000).fadeOut(500);
@@ -102,9 +128,10 @@ $(document).ready(function() {
     }
   }
 
-  $("#help").click(function() {
-    $("#instructions").slideToggle()
+  $help.click(function() {
+    $instructions.slideToggle();
   });
+
 
   $additionDiv.click(function() {
     if (mathType != "addition") {
